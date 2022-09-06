@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { genSalt, hash, compareSync } from 'bcrypt';
+import { hash, compareSync } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const { Schema, model } = mongoose;
@@ -15,13 +15,6 @@ export const UserSchema = new Schema({
     required: true,
     unique: true,
     trim: true,
-    validate: {
-      validator(val, a) {
-        console.log(a);
-        return true;
-      },
-      message: () => 'E-mail já existente',
-    },
   },
   senha: {
     type: String,
@@ -54,14 +47,11 @@ export const UserSchema = new Schema({
   }],
   token: {
     type: String,
-    required: true,
   },
 });
 
-const salt = genSalt(10);
-
 UserSchema.pre('save', async function (next) {
-  this.senha = await hash(this.senha, salt);
+  this.senha = await hash(this.senha, 10);
 
   this.token = jwt.sign({
     sub: this.id,

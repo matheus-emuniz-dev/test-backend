@@ -1,3 +1,4 @@
+import UserReturnDto from '../../../domain/user/dto/userReturnDto.js';
 import UserRepository from '../../../domain/user/user.repository.js';
 
 async function getUserService(req, res) {
@@ -11,7 +12,9 @@ async function getUserService(req, res) {
     });
   }
 
-  return res.json(user);
+  const userReturnDto = new UserReturnDto(user.toJSON());
+
+  return res.json(userReturnDto);
 }
 
 export default getUserService;

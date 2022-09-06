@@ -1,4 +1,4 @@
-import UserReturnDto from '../../../domain/user/DTOs/userReturnDto.js';
+import UserReturnDto from '../../../domain/user/dto/userReturnDto.js';
 import UserRepository from '../../../domain/user/user.repository.js';
 
 async function signin(req, res) {
@@ -21,7 +21,7 @@ async function signin(req, res) {
   user.ultimoLogin = Date.now();
   user.save();
 
-  const userReturnDto = UserReturnDto(user.toJson());
+  const userReturnDto = new UserReturnDto(user.toJSON());
 
   return res.status(200).json(userReturnDto);
 }

@@ -2,9 +2,7 @@ import User from './user.entity.js';
 
 export default class UserRepository {
   static create(userCreateDto) {
-    return User.create({
-      ...userCreateDto.data,
-    });
+    return User.create(userCreateDto);
   }
 
   static findById(id) {
