@@ -18,9 +18,7 @@ export default {
   start() {
     database.connect();
 
-    _app.listen(port, () => {
-      console.log(`Listening in port ${port}`);
-    });
+    _app.listen(port);
 
     return _app;
   },

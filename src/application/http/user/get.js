@@ -6,8 +6,6 @@ async function getUserService(req, res) {
 
   const user = await UserRepository.findById(userId);
 
-  console.log(req.token);
-
   if (req.token !== user.token) {
     return res.status(401).json({
       mensagem: 'Não autorizado',
