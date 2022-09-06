@@ -1,9 +1,15 @@
-export default class UserCreateDto {
+export default class UserReturnDto {
   nome;
 
   email;
 
   telefones;
+
+  dataCriacao;
+
+  dataAtualizacao;
+
+  ultimoLogin;
 
   token;
 
@@ -19,7 +25,7 @@ export default class UserCreateDto {
     this.token = token;
   }
 
-  toJson() {
+  toJSON() {
     return {
       nome: this.nome,
       email: this.email,
@@ -27,6 +33,7 @@ export default class UserCreateDto {
       dataCriacao: this.dataCriacao,
       dataAtualizacao: this.dataAtualizacao,
       ultimoLogin: this.ultimoLogin,
+      token: this.token,
     };
   }
 }
