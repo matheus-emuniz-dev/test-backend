@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start:dev": "nodemon src/application/server.js"
+    "start:dev": "nodemon index.js"
   },
   "name": "test-backend",
   "type": "module",
