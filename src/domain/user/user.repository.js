@@ -1,9 +1,9 @@
 import User from './user.entity.js';
 
 export default class UserRepository {
-  static create(userDto) {
+  static create(userCreateDto) {
     return User.create({
-      ...userDto.data,
+      ...userCreateDto.data,
     });
   }
 

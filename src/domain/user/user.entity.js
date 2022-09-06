@@ -1,31 +1,42 @@
-import { model, Schema } from 'mongoose';
-import { genSalt, hash } from 'bcrypt';
-import joi from 'joi';
+import mongoose from 'mongoose';
+import { genSalt, hash, compareSync } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-export const userSchema = new Schema({
+const { Schema, model } = mongoose;
+
+export const UserSchema = new Schema({
   nome: {
     type: String,
     required: true,
+    trim: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
+    trim: true,
+    validate: {
+      validator(val, a) {
+        console.log(a);
+        return true;
+      },
+      message: () => 'E-mail já existente',
+    },
   },
   senha: {
     type: String,
     required: true,
+    trim: true,
   },
-  data_criacao: {
+  dataCriacao: {
     type: Date,
     default: Date.now(),
   },
-  data_atualizacao: {
+  dataAtualizacao: {
     type: Date,
     default: Date.now(),
   },
-  ultimo_login: {
+  ultimoLogin: {
     type: Date,
     default: Date.now(),
   },
@@ -33,10 +44,12 @@ export const userSchema = new Schema({
     numero: {
       type: String,
       required: true,
+      trim: true,
     },
     ddd: {
       type: String,
       required: true,
+      trim: true,
     },
   }],
   token: {
@@ -47,7 +60,7 @@ export const userSchema = new Schema({
 
 const salt = genSalt(10);
 
-userSchema.pre('save', async function (next) {
+UserSchema.pre('save', async function (next) {
   this.senha = await hash(this.senha, salt);
 
   this.token = jwt.sign({
@@ -60,18 +73,10 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-export const userValidationSchema = joi.object({
-  nome: joi.string().required(),
-  email: joi.string().email().required(),
-  senha: joi.string(),
-  telefones: joi.array().items(
-    joi.object({
-      numero: joi.string().required(),
-      ddd: joi.string().required(),
-    }),
-  ).required().min(0),
-});
+UserSchema.methods.comparePassword = function (password) {
+  return compareSync(password, this.senha);
+};
 
-const User = model('User', userSchema);
+const User = model('User', UserSchema);
 
 export default User;
