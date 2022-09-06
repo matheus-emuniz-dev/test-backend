@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start:dev": "nodemon index.js"
+    "start:dev": "nodemon index.js",
+    "test": "vitest"
   },
   "name": "test-backend",
   "type": "module",
@@ -11,14 +12,18 @@
     "body-parser": "^1.20.0",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
-    "jest": "^29.0.2",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.5.4"
+    "mongodb-memory-server": "^8.9.1",
+    "mongoose": "^6.5.4",
+    "supertest": "^6.2.4"
   },
   "devDependencies": {
+    "@types/supertest": "^2.0.12",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb-base": "latest",
-    "eslint-plugin-import": "^2.25.2"
+    "eslint-plugin-import": "^2.25.2",
+    "jest": "^29.0.2",
+    "vitest": "^0.23.1"
   }
 }

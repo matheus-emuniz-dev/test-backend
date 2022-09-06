@@ -22,7 +22,7 @@ async function signup(req, res) {
     newUser = await UserRepository.create(userCreateDto.toJSON());
   } catch (error) {
     if (error.code === 11000) {
-      return res.status(500).json({
+      return res.status(422).json({
         mensagem: 'E-mail já existente',
       });
     }

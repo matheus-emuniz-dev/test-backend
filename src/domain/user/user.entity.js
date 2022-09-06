@@ -48,6 +48,12 @@ export const UserSchema = new Schema({
   token: {
     type: String,
   },
+}, {
+  methods: {
+    comparePassword(password) {
+      return compareSync(password, this.senha);
+    },
+  },
 });
 
 UserSchema.pre('save', async function (next) {
@@ -62,10 +68,6 @@ UserSchema.pre('save', async function (next) {
 
   next();
 });
-
-UserSchema.methods.comparePassword = function (password) {
-  return compareSync(password, this.senha);
-};
 
 const User = model('User', UserSchema);
 

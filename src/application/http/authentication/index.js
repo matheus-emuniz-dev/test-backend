@@ -4,7 +4,7 @@ import signup from './signup.js';
 
 const authenticationRouter = Router();
 
-authenticationRouter.use('/signin', signin);
-authenticationRouter.use('/signup', signup);
+authenticationRouter.post('/signin', signin);
+authenticationRouter.post('/signup', signup);
 
 export default authenticationRouter;

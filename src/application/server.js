@@ -4,20 +4,24 @@ import express from 'express';
 import database from '../infra/database.js';
 import apiRouter from './http/routes.js';
 
-const app = express();
+const _app = express();
 
-app.use(bodyParser.json());
+_app.use(bodyParser.json());
 
-app.use('/api', apiRouter);
+_app.use('/api', apiRouter);
 
 const port = 3000;
+
+export const app = _app;
 
 export default {
   start() {
     database.connect();
 
-    app.listen(port, () => {
+    _app.listen(port, () => {
       console.log(`Listening in port ${port}`);
     });
+
+    return _app;
   },
 };
