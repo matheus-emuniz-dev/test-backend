@@ -16,4 +16,15 @@ export default class UserRepository {
       email,
     });
   }
+
+  static updateUltimoLogin(id) {
+    return User.updateOne({
+      id,
+    }, {
+      $set: {
+        ultimoLogin: Date.now(),
+        dataAtualizacao: Date.now(),
+      },
+    });
+  }
 }
