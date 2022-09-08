@@ -1,8 +1,8 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 
-import database from '../infra/database.js';
-import apiRouter from './http/routes.js';
+import database from '../../infra/database.js';
+import apiRouter from './routes.js';
 
 const appInstance = express();
 

@@ -4,7 +4,7 @@ import {
 } from 'vitest';
 import request from 'supertest';
 import database from '../../../../infra/database';
-import { app } from '../../../server';
+import { app } from '../../server';
 import User from '../../../../domain/user/user.entity';
 
 dotenv.config();
