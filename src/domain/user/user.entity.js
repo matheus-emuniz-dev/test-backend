@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { hash, compareSync } from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import jwt from '../../infra/jwt.js';
 
 const { Schema, model } = mongoose;
 
@@ -50,7 +50,7 @@ export const UserSchema = new Schema({
   },
 }, {
   methods: {
-    comparePassword(password) {
+    compareSenha(password) {
       return compareSync(password, this.senha);
     },
   },
@@ -59,12 +59,7 @@ export const UserSchema = new Schema({
 UserSchema.pre('save', async function (next) {
   this.senha = await hash(this.senha, 10);
 
-  this.token = jwt.sign({
-    sub: this.id,
-  }, process.env.AUTH_SECRET, {
-    expiresIn: '24h',
-    algorithm: 'HS256',
-  });
+  this.token = jwt.sign({ payload: { sub: this.id } });
 
   next();
 });

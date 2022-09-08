@@ -1,10 +1,13 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
-import User from '../domain/user/user.entity';
+import User from '../domain/user/user.entity.js';
+import config from './config.js';
+
+const currentConfig = config.get();
 
 export default {
   connect() {
-    mongoose.connect(process.env.DATABASE_URL);
+    mongoose.connect(currentConfig.databaseUrl);
   },
 
   async setupMock() {

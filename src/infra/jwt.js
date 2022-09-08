@@ -8,7 +8,7 @@ export default {
     return jwt.verify(payload, currentConfig.secret);
   },
 
-  sign(payload) {
+  sign({ payload }) {
     return jwt.sign(payload, currentConfig.secret);
   },
 

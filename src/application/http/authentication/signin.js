@@ -12,14 +12,13 @@ async function signin(req, res) {
 
   const user = await UserRepository.findByEmail(email);
 
-  if (!user || !user.comparePassword(senha, user.senha)) {
+  if (!user || !user.compareSenha(senha, user.senha)) {
     return res.status(401).json({
       mensagem: 'Usuário e/ou senha inválidos',
     });
   }
 
-  user.ultimoLogin = Date.now();
-  user.save();
+  UserRepository.updateUltimoLogin(user.id);
 
   const userReturnDto = new UserReturnDto(user.toJSON());
 

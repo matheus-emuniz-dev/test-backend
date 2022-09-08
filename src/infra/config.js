@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 class Config {
   environment;
 
@@ -13,24 +17,24 @@ class Config {
 }
 
 const development = new Config({
-  environment: process.env.NODE_ENV,
+  databaseUrl: process.env.DEV_DATABASE_URL,
+  secret: process.env.DEV_SECRET,
+});
+
+const production = new Config({
   databaseUrl: process.env.DATABASE_URL,
   secret: process.env.SECRET,
 });
 
-const production = new Config({
-
-});
-
 export default {
   get() {
-    switch (process.env.environment) {
+    switch (process.env.NODE_ENV) {
       case 'development':
         return development;
       case 'production':
         return production;
       default:
-        return development;
+        return production;
     }
   },
 };
