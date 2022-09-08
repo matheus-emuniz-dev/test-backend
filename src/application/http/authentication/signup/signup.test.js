@@ -3,8 +3,8 @@ import {
 } from 'vitest';
 import request from 'supertest';
 import dotenv from 'dotenv';
-import { app } from '../../server';
-import database from '../../../infra/database';
+import { app } from '../../../server';
+import database from '../../../../infra/database';
 
 dotenv.config();
 

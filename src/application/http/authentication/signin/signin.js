@@ -1,5 +1,5 @@
-import UserReturnDto from '../../../domain/user/dto/userReturnDto.js';
-import UserRepository from '../../../domain/user/user.repository.js';
+import UserReturnDto from '../../../../domain/user/dto/userReturnDto.js';
+import UserRepository from '../../../../domain/user/user.repository.js';
 
 async function signin(req, res) {
   const { email, senha } = req.body;

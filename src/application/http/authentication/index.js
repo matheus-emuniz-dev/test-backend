@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import signin from './signin.js';
-import signup from './signup.js';
+import signin from './signin/signin.js';
+import signup from './signup/signup.js';
 
 const authenticationRouter = Router();
 

@@ -1,7 +1,7 @@
-import UserCreateDto from '../../../domain/user/dto/userCreateDto.js';
-import UserReturnDto from '../../../domain/user/dto/userReturnDto.js';
-import UserRepository from '../../../domain/user/user.repository.js';
-import UserCreateValidator from '../../../infra/validators/userCreate.validator.js';
+import UserCreateDto from '../../../../domain/user/dto/userCreateDto.js';
+import UserReturnDto from '../../../../domain/user/dto/userReturnDto.js';
+import UserRepository from '../../../../domain/user/user.repository.js';
+import UserCreateValidator from '../../../../infra/validators/userCreate.validator.js';
 
 async function signup(req, res) {
   const userCreateData = req.body;
