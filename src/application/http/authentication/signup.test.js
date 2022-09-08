@@ -1,5 +1,5 @@
 import {
-  beforeAll, describe, it,
+  beforeAll, describe, expect, it,
 } from 'vitest';
 import request from 'supertest';
 import dotenv from 'dotenv';
@@ -34,5 +34,16 @@ describe.concurrent('Sign Up', () => {
       numero: '333333333',
       ddd: '123',
     }],
-  }).expect(200));
+  }).expect(200)
+    .then((response) => expect(response.body).toEqual(
+      expect.objectContaining({
+        nome: expect.any(String),
+        email: expect.any(String),
+        telefones: expect.any(Array),
+        dataCriacao: expect.any(String),
+        dataAtualizacao: expect.any(String),
+        ultimoLogin: expect.any(String),
+        token: expect.any(String),
+      }),
+    )));
 });
