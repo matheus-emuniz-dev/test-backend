@@ -10,7 +10,7 @@ class Config {
   secret;
 
   constructor({ databaseUrl, secret }) {
-    this.environment = process.env.NODE_ENV;
+    this.environment = process.env.NODE_ENV || 'development';
     this.databaseUrl = databaseUrl;
     this.secret = secret;
   }
