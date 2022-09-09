@@ -53,23 +53,27 @@ export const UserSchema = new Schema({
     compareSenha(password) {
       return compareSync(password, this.senha);
     },
+
+    generateToken() {
+      this.token = jwt.sign({
+        payload: {
+          iss: 'test-backend',
+          sub: this.id,
+          iat: new Date().getTime(),
+          context: {
+            email: this.email,
+            telefones: this.telefones,
+          },
+        },
+      });
+    },
   },
 });
 
 UserSchema.pre('save', async function (next) {
   this.senha = await hash(this.senha, 10);
 
-  this.token = jwt.sign({
-    payload: {
-      iss: 'test-backend',
-      sub: this.id,
-      iat: new Date().getTime(),
-      context: {
-        email: this.email,
-        telefones: this.telefones,
-      },
-    },
-  });
+  this.generateToken();
 
   next();
 });
