@@ -59,7 +59,17 @@ export const UserSchema = new Schema({
 UserSchema.pre('save', async function (next) {
   this.senha = await hash(this.senha, 10);
 
-  this.token = jwt.sign({ payload: { sub: this.id } });
+  this.token = jwt.sign({
+    payload: {
+      iss: 'test-backend',
+      sub: this.id,
+      iat: new Date().getTime(),
+      context: {
+        email: this.email,
+        telefones: this.telefones,
+      },
+    },
+  });
 
   next();
 });
