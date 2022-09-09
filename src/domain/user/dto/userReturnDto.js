@@ -1,4 +1,6 @@
 export default class UserReturnDto {
+  id;
+
   nome;
 
   email;
@@ -14,8 +16,9 @@ export default class UserReturnDto {
   token;
 
   constructor({
-    nome, email, telefones, dataCriacao, dataAtualizacao, ultimoLogin, token,
+    _id, nome, email, telefones, dataCriacao, dataAtualizacao, ultimoLogin, token,
   }) {
+    this.id = _id;
     this.nome = nome;
     this.email = email;
     this.telefones = telefones;
@@ -27,6 +30,7 @@ export default class UserReturnDto {
 
   toJSON() {
     return {
+      id: this.id,
       nome: this.nome,
       email: this.email,
       telefones: this.telefones,
