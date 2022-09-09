@@ -20,9 +20,13 @@ DEV_SECRET = 'YOUR_DEV_SECRET'
 
 ## Rodando a aplicação e testes
 
-- Aplicação
+- Instalação
 ```
 npm install
+```
+
+- Aplicação
+```
 npm run start:dev
 ```
 - Testes unitários (MongoDB mockado)
